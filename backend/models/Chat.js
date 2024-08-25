@@ -21,12 +21,25 @@ const ChatSchema = new Schema({
         type: Boolean
     },
     users: {
-        type: [UserSchema]
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }]
     },
     chatName: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
+    latestMessage: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Message"
+
+    },
+    groupAdmin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model("Chat", ChatSchema)
